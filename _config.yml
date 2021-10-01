@@ -6,14 +6,14 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: 계산신경과학연구실
-short_labname: ChungLab
-email: physi5logy@gmail.com
+title: 금융빅데이터 LAB
+short_labname: FLAB
+email: eunsuh753@gmail.com
 logo: logo.png
 description: > # 다음 줄에 연구실 소개 입력
-  ChungLab of Computational Neuroscience, Seoul National University; 서울대학교 치과대학 정지훈 교수 감각신경 연구실; Gehoon Chung;
+  This is Home!!
 baseurl: "" # the subpath of your site, e.g. /blog
-github_username:  ChungLab
+github_username:  eunsuh753
 google-site-verification:
 
 # Build settings

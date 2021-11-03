@@ -50,7 +50,7 @@ from sklearn.model_selection import KFold
 df = pd.read_csv("train_data.csv")
 ```
 
-# 1. 데이터분석
+## 1. 데이터분석
 
 ### 상관관계
 
@@ -73,7 +73,7 @@ sns.heatmap(data=df.corr().abs(), annot=True, fmt='.2f', linewidths=.5)
 
 
 
-# 2. 전처리
+## 2. 전처리
 
 
 ```python
@@ -226,7 +226,7 @@ print(df2.isna().sum().sum())
 df3 = df2.dropna()
 ```
 
-# 3. 모델링
+## 3. 모델링
 
 
 ```python
@@ -246,7 +246,7 @@ def new_accuracy(y_test, pred):
     return accuracy_count/len(pred)
 ```
 
-## 1) 방문자수 예측 
+### 1) 방문자수 예측 
 
 
 ```python
@@ -423,7 +423,7 @@ scaled_V_X_test
 
 
 
-### 방문자수 잘 예측하는지 샘플 테스트 
+#### 방문자수 잘 예측하는지 샘플 테스트 
 
 
 ```python
@@ -452,7 +452,7 @@ V_lgbm.predict(ex_scaled)
 
 
 
-### 학습된 방문자수 시각화 
+#### 학습된 방문자수 시각화 
 
 
 ```python
@@ -475,7 +475,7 @@ plt.close()
 
 
 
-## 2) 입원기간 예측
+### 2) 입원기간 예측
 
 
 ```python
@@ -638,7 +638,7 @@ lgbm.predict(ex2_scaled)
 
 
 
-### 변수 중요도
+#### 변수 중요도
 
 
 ```python
@@ -664,7 +664,7 @@ plot_importance(lgbm, max_num_features=15, ax=ax)
 
 
 
-### 학습된 입원기간 시각화
+#### 학습된 입원기간 시각화
 
 
 ```python
@@ -694,7 +694,7 @@ plt.close()
 
 ```
 
-# 4. 성능 개선하기
+## 4. 성능 개선하기
 
 
 ```python
@@ -943,7 +943,7 @@ data_final.info()
     memory usage: 23.5 MB
 
 
-## 1) 최종 방문자수 예측 모델 
+### 1) 최종 방문자수 예측 모델 
 
 
 ```python
@@ -994,7 +994,7 @@ print("new accuracy: ", np.round(new_accuracy(V_y_test, V_lgbm_pred_f),5))
     new accuracy:  0.99929
 
 
-## 2) 최종 입원기간 예측 모델
+### 2) 최종 입원기간 예측 모델
 
 
 ```python
@@ -1051,7 +1051,7 @@ print("new accuracy: ", np.round(new_accuracy(y_test, lgbm_pred_f),5))
     new accuracy:  0.75359
 
 
-## 최종 모델 변환하기 
+### 최종 모델 변환하기 
 
 
 ```python

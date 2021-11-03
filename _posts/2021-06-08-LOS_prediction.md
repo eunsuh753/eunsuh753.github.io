@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "입원 기간 예측"
+toc: true
+toc_sticky: true
+---
+
+
 # <입원 기간 예측 알고리즘>
 
 **이화여자대학교  
@@ -62,8 +70,9 @@ sns.heatmap(data=df.corr().abs(), annot=True, fmt='.2f', linewidths=.5)
 
 
 
+![output_7_1](https://user-images.githubusercontent.com/62747570/139969438-fee504bd-2fe3-4bd0-849d-fa882986ac76.png)
 
-![png](output_7_1.png)
+
 
 
 # 2. 전처리
@@ -114,14 +123,17 @@ df2.head(5)
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -194,6 +206,7 @@ df2.head(5)
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -207,7 +220,7 @@ print(df2.isna().sum().sum())
 
     Data set의 결측치: 
     0
-    
+
 
 
 ```python
@@ -258,14 +271,17 @@ V_X_train.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -326,6 +342,7 @@ V_X_train.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -374,7 +391,7 @@ print("MAE: ", mae)
     Lightgbm Regressor Model
     RMSE:  1.677
     r2 score:  0.125
-    
+
 
 
 ```python
@@ -382,7 +399,7 @@ print("new accuracy: ", np.round(new_accuracy(V_y_test, V_lgbm_pred),5))
 ```
 
     new accuracy:  0.99934
-    
+
 
 
 ```python
@@ -455,8 +472,9 @@ plt.show()
 plt.close()
 ```
 
+![output_29_0](https://user-images.githubusercontent.com/62747570/139969547-0327d9fc-4bec-40c7-a6c9-46364a926f78.png)
 
-![png](output_29_0.png)
+
 
 
 ## 2) 입원기간 예측
@@ -475,14 +493,17 @@ X_train.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -549,6 +570,7 @@ X_train.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -594,7 +616,7 @@ print("MAE: ", mae)
     Lightgbm Regressor Model
     RMSE:  16.796
     r2 score:  0.401
-    
+
 
 
 ```python
@@ -602,7 +624,7 @@ print("new accuracy: ", np.round(new_accuracy(y_test, lgbm_pred),5))
 ```
 
     new accuracy:  0.70987
-    
+
 
 
 ```python
@@ -639,8 +661,9 @@ plot_importance(lgbm, max_num_features=15, ax=ax)
 
 
 
+![output_38_1](https://user-images.githubusercontent.com/62747570/139969558-0a8e8ae0-f4eb-4f8d-afdf-151c06b1c1be.png)
 
-![png](output_38_1.png)
+
 
 
 ### 학습된 입원기간 시각화
@@ -663,8 +686,9 @@ plt.close()
 
 ```
 
+![output_40_0](https://user-images.githubusercontent.com/62747570/139969585-ce07b9b5-8275-492f-82be-1a865e0e5606.png)
 
-![png](output_40_0.png)
+
 
 
 
@@ -676,7 +700,6 @@ plt.close()
 
 
 ```python
-
 kf = KFold(n_splits = 10)
 df = pd.DataFrame(columns = ['Department', 'Type of Admission','Visitors with Patient', 'Severity of Illness', 
                                  'Available Extra Rooms in Hospital', 'Age','Admission_Deposit','mae','Stay'])
@@ -718,14 +741,17 @@ small_mae_final
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -877,6 +903,7 @@ small_mae_final
   </tbody>
 </table>
 <p>308266 rows × 9 columns</p>
+
 </div>
 
 
@@ -916,13 +943,12 @@ data_final.info()
      8   Stay                               308263 non-null  float64
     dtypes: float64(9)
     memory usage: 23.5 MB
-    
+
 
 ## 1) 최종 방문자수 예측 모델 
 
 
 ```python
-
 V_X_data =  data_final.drop(['Stay', 'mae','Visitors with Patient'], axis=1)
 V_y_data = data_final['Visitors with Patient']
 V_X_train, V_X_test, V_y_train, V_y_test = train_test_split(V_X_data, V_y_data, test_size = 0.1, random_state=777)
@@ -968,7 +994,7 @@ print("new accuracy: ", np.round(new_accuracy(V_y_test, V_lgbm_pred_f),5))
     r2 score:  0.128
     MAE:  1.0837676468166921
     new accuracy:  0.99929
-    
+
 
 ## 2) 최종 입원기간 예측 모델
 
@@ -1025,7 +1051,7 @@ print("new accuracy: ", np.round(new_accuracy(y_test, lgbm_pred_f),5))
     r2 score:  0.487
     MAE:  10.61113587349634
     new accuracy:  0.75359
-    
+
 
 ## 최종 모델 변환하기 
 

@@ -6,7 +6,7 @@ toc: true
 sticky-toc: true
 ---
 
-# 1. 데이터 파악
+## 1. 데이터 파악
 
 ```python
 import pandas as pd
@@ -136,7 +136,7 @@ train.info()
     memory usage: 450.2+ MB
 
 
-# 2. 전처리
+## 2. 전처리
 
 * 매출액에 음수 값이 보이고, 환불은 금액으로 예상됨
 * 환불은 log 정규화를 했을때 무한대가 나오기 때문에 제거 하기로 결정
@@ -951,7 +951,7 @@ train_remove['is_active'].value_counts()
 
 
 
-# 3. EDA
+## 3. EDA
 
 ### 요일별 매출 비교
 
@@ -1823,8 +1823,8 @@ from tqdm import tqdm
 from statsmodels.tsa.stattools import adfuller as adf_test
 from pmdarima.arima import auto_arima
 ```
-# 4. 모델링
-## 아리마 예측 모델
+## 4. 모델링
+### 아리마 예측 모델
 
 
 ```python

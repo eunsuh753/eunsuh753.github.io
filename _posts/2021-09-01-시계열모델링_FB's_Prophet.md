@@ -1,10 +1,19 @@
+---
+layout: post
+title:  "시계열 모델링: FB's Prophet"
+
+toc: true
+toc_sticky: true
+
+---
+
 ```python
 from google.colab import drive
 drive.mount('/content/drive')
 ```
 
     Mounted at /content/drive
-    
+
 
 
 ```python
@@ -12,10 +21,12 @@ cd /content/drive/MyDrive/금융빅데이터분
 ```
 
     /content/drive/MyDrive/금융빅데이터분석가/핀테크_데이터분석
-    
 
-# 1. Airline Passenger 예측
+
+## 1. Airline Passenger 예측
+
 ### Facebook의 Prophet을 사용하여 월간 시계열 모델링 기법 실습
+
 - Air passengers는 1949~1960년까지의 고전적인 시계열 데이터 세트
 
 
@@ -43,14 +54,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -87,6 +101,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -108,10 +123,12 @@ plt.show()
     INFO:numexpr.utils:NumExpr defaulting to 2 threads.
     INFO:fbprophet:Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
     INFO:fbprophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-    
 
 
-![png](output_6_1.png)
+
+![output_6_1](https://user-images.githubusercontent.com/62747570/140023588-ea5fdb15-bef7-402d-bfc3-d400c54636b5.png)
+
+
 
 
 - 매월 1일에 계절성 계산을 적절히 적용할 수 있지만, 나머지 날에는 그래프에서 보듯이 무엇을 해야 하는지 잘 모르고 예측할 수 없는 방식으로 계절성 곡선을 과적합하였음.  
@@ -130,10 +147,12 @@ plt.show()
 
     INFO:fbprophet:Disabling weekly seasonality. Run prophet with weekly_seasonality=True to override this.
     INFO:fbprophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-    
 
 
-![png](output_8_1.png)
+
+![output_8_1](https://user-images.githubusercontent.com/62747570/140023593-681cdca6-846f-4381-ba53-32b4fca2d2f0.png)
+
+
 
 
 - 월간 빈도로 미래 예측
@@ -141,9 +160,13 @@ plt.show()
 - freq를 다른 설정으로 변경할 때마다 기간을 동일한 눈금으로 설정해야 함.
 
 ---
-# 2. Divvy bike share program
+
+## 2. Divvy bike share program
+
 ### Facebook의 Prophet을 사용하여 서브 일간(sub-daily) 시계열 모델링 기법 실습
+
 ### (sub-daily: 하루 내에도 패턴이 존재함)
+
 - 미국 일리노이주 시카고에 있는 Divvy 자전거 공유 프로그램 데이터
   - 2014년 초부터 2018년 말까지 시간당 자전거 이용 횟수 포함
   - 매년 매우 강한 계절성과 함께 일반적으로 증가하는 추세
@@ -168,14 +191,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -212,6 +238,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -223,8 +250,9 @@ plt.tight_layout()
 plt.show()
 ```
 
+![output_13_0](https://user-images.githubusercontent.com/62747570/140023596-fa61333a-1fbb-4fd3-9c16-2046a33bc623.png)
 
-![png](output_13_0.png)
+
 
 
 - 시간별 데이터이고 밤새 타는 횟수가 매우 적기 때문에 데이터는 최저점에서 측정 밀도를 보여줌
@@ -240,8 +268,9 @@ fig = model.plot(forecast)
 plt.show()
 ```
 
+![output_15_0](https://user-images.githubusercontent.com/62747570/140023598-addb57a9-c176-40ba-b88c-9bc91ea5db0c.png)
 
-![png](output_15_0.png)
+
 
 
 - 다소 큰 불확실성이 보임
@@ -253,23 +282,27 @@ fig2 = model.plot_components(forecast)
 plt.show()
 ```
 
+![output_17_0](https://user-images.githubusercontent.com/62747570/140023600-5bc9a165-12d9-48b7-a4a7-85c7f5ce1ba7.png)
 
-![png](output_17_0.png)
+
 
 
 <복잡한 계절성>
+
 - 계절성 자체는 연중 계절성
 - 계절성 속의 계절성
 - 일별 계절성은 낮에 상승하고 밤에 감소하지만 증가량은 연중 시기에 따라 달라짐
 - Prophet은 이러한 유형의 계절성을 포착하지는 못하기 때문에 예측의 불확실성이 매우 큰 것임. (이를 제어하는 몇 가지 기술 배울 것임)  
 
 <주간 계절성>
+
 - 단일 곡선
 - 일요일에서 일요일로 이동 -> 시간별 데이터의 보다 지속적인 특성을 반영하기 위한 것
-<연간 계절성>
+  <연간 계절성>
 - 꽤 물결 모양 (계절성과 관련된 푸리에 차수(Fourier Order)에서 다루게 됨
 
 <일별 계절성>
+
 - 오전 8시경에 많이 타고 출근하는 것으로 보임
 - 오후 5시경에 많이 타고 퇴근하는 것으로 보임
 - 자정 직후에 올빼미족
@@ -278,6 +311,7 @@ plt.show()
 
 
 ## 규칙적인 간격이 있는 데이터 사용 (data with regular gaps)
+
 ex) 근무 시간, 개인 시간 및 수면 시간이 있는 사람이 데이터를 수집한 경우  
 하지만 완벽한 주기로 측정값을 수집하는 것은 불가능할 수 있음.
 
@@ -295,8 +329,9 @@ plt.tight_layout()
 plt.show()
 ```
 
+![output_20_0](https://user-images.githubusercontent.com/62747570/140023603-ca2421fc-0d3c-4428-99ea-5ded734595aa.png)
 
-![png](output_20_0.png)
+
 
 
 - 원데이터에 비해 y축 값이 낮으면서(?) 훨씬 더 희소함
@@ -313,8 +348,9 @@ fig = model.plot(forecast)
 plt.show()
 ```
 
+![output_22_0](https://user-images.githubusercontent.com/62747570/140023606-be6181c9-e80e-42ce-9ff4-f8dbfe93e7de.png)
 
-![png](output_22_0.png)
+
 
 
 - 과거 훈련 데이터보다 미래 기간의 훨씬 더 넓은 일일 변동을 보여줌
@@ -328,8 +364,9 @@ plt.ylim(-2000, 4000)
 plt.show()
 ```
 
+![output_24_0](https://user-images.githubusercontent.com/62747570/140023607-d9653904-4c93-47fc-ad18-3c8da93dd1b3.png)
 
-![png](output_24_0.png)
+
 
 
 - 오전 8시 이전에 승객이 몰리고 오전 8시에 국지적으로 정점을 찍는다.
@@ -349,8 +386,9 @@ add_changepoints_to_plot(fig.gca(), model, forecast2)
 plt.show()
 ```
 
+![output_26_0](https://user-images.githubusercontent.com/62747570/140023609-6d8051ff-3fc3-4d64-998f-201228d13a56.png)
 
-![png](output_26_0.png)
+
 
 
 - 더 좁은 범위의 예측을 보여줌
@@ -364,8 +402,9 @@ plt.ylim(-2000, 4000)
 plt.show()
 ```
 
+![output_28_0](https://user-images.githubusercontent.com/62747570/140023610-e2ffaa26-0d5c-4ece-8a42-2a3a9e18c270.png)
 
-![png](output_28_0.png)
+
 
 
 - 오전 8시에서 오후 6시 사이는 같은 곡선으로 표시되지만 그 사이를 단순 직선으로 연결함
@@ -378,19 +417,23 @@ plot_seasonality(model, 'daily', figsize=(10, 3))
 plt.show()
 ```
 
+![output_30_0](https://user-images.githubusercontent.com/62747570/140023611-96572462-6779-4780-90f9-0580526caa1e.png)
 
-![png](output_30_0.png)
+
 
 
 - 일일 계절성은 두 버전 모두 동일함
 
 ---
+
 # 자동 추세 변화점(Automatic Trend Changepoint) 감지
+
 - 추세 변경점: 모델의 추세 구성 요소가 갑자기 나타나는 시계열의 위치
 - 변경점이 발생하는 여러 이유 존재 ex) Facebook은 일일 활성 사용자 수를 모델링하고 새로운 기능이 출시되면 추세의 급격환 변화를 확인할 수 있음, 항공사 승객 수는 규모의 경제로 인해 갑자기 변경될 수 있으므로 훨씬 저렴한 항공편 가능
 - Divvy 데이터 세트에서 2년 후 성장이 둔화되는 것을 확인하였음. 이를 자세히 보자
 
 ### 기본 변경점 감지(Default Changepoint Detection)
+
 - Prophet 세트 변경점이 발생할 수 있는 잠재적 날짜의 수를 먼저 지정하여 변경점 지정
 - Prophet은 이러한 각 지점에서 변화의 크기를 계산하는 작업을 수행하여 해당 크기를 가능한 한 낮게 유지하면서 추세 곡선에 맞추려고 함.
 - changepoint_prior_scale을 조정하여 유연성 조정 가능
@@ -418,14 +461,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -474,6 +520,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -513,8 +560,9 @@ plt.ylabel('Rides per day')
 plt.show()
 ```
 
+![output_36_0](https://user-images.githubusercontent.com/62747570/140023613-c13a94d3-32be-4dc9-a51b-98cebfad4947.png)
 
-![png](output_36_0.png)
+
 
 
 - default로 Prophet은 25개의 잠재적인 변경점을 배치함
@@ -532,7 +580,7 @@ forecast = model.predict()
 
     INFO:numexpr.utils:NumExpr defaulting to 2 threads.
     INFO:fbprophet:Disabling daily seasonality. Run prophet with daily_seasonality=True to override this.
-    
+
 
 
 ```python
@@ -543,8 +591,9 @@ add_changepoints_to_plot(fig.gca(), model, forecast)
 plt.show()
 ```
 
+![output_39_0](https://user-images.githubusercontent.com/62747570/140023615-58f33a3c-399f-4ca3-8e41-d9dfe306cc7a.png)
 
-![png](output_39_0.png)
+
 
 
 - 25개의 잠재적 변경점 중 5개가 실제로 중요하다고 결정했음
@@ -566,7 +615,7 @@ print(model.params['delta'])
       -3.39913071e-02 -4.62595330e-09 -1.11355235e-06 -4.83772637e-08
       -4.29852468e-08 -4.55749633e-08  5.32563788e-09 -2.60731418e-08
       -2.28944904e-09]]
-    
+
 
 
 ```python
@@ -585,15 +634,15 @@ plt.show()
 
 
     ---------------------------------------------------------------------------
-
+    
     ValueError                                Traceback (most recent call last)
-
+    
     <ipython-input-18-cfe016add7ff> in <module>()
           2 add_changepoints_to_plot(fig.gca(), model, forecast)
           3 ax2 = ax.twinx()
     ----> 4 ax2.bar(df['ds'], deltas, facecolor='blue', edgecolor='red', width=15, alpha=0.5)
           5 plt.show()
-    
+
 
     /usr/local/lib/python3.7/dist-packages/matplotlib/__init__.py in inner(ax, data, *args, **kwargs)
        1563     def inner(ax, *args, data=None, **kwargs):
@@ -601,7 +650,7 @@ plt.show()
     -> 1565             return func(ax, *map(sanitize_sequence, args), **kwargs)
        1566 
        1567         bound = new_sig.bind(ax, *args, **kwargs)
-    
+
 
     /usr/local/lib/python3.7/dist-packages/matplotlib/axes/_axes.py in bar(self, x, height, width, bottom, align, **kwargs)
        2340         x, height, width, y, linewidth = np.broadcast_arrays(
@@ -609,10 +658,10 @@ plt.show()
     -> 2342             np.atleast_1d(x), height, width, y, linewidth)
        2343 
        2344         # Now that units have been converted, set the tick locations.
-    
+
 
     <__array_function__ internals> in broadcast_arrays(*args, **kwargs)
-    
+
 
     /usr/local/lib/python3.7/dist-packages/numpy/lib/stride_tricks.py in broadcast_arrays(subok, *args)
         256     args = [np.array(_m, copy=False, subok=subok) for _m in args]
@@ -620,7 +669,7 @@ plt.show()
     --> 258     shape = _broadcast_shape(*args)
         259 
         260     if all(array.shape == shape for array in args):
-    
+
 
     /usr/local/lib/python3.7/dist-packages/numpy/lib/stride_tricks.py in _broadcast_shape(*args)
         187     # use the old-iterator because np.nditer does not handle size 0 arrays
@@ -628,13 +677,15 @@ plt.show()
     --> 189     b = np.broadcast(*args[:32])
         190     # unfortunately, it cannot handle 32 or more arguments directly
         191     for pos in range(32, len(args), 31):
-    
+
 
     ValueError: shape mismatch: objects cannot be broadcast to a single shape
 
 
 
-![png](output_44_1.png)
+![output_44_1](https://user-images.githubusercontent.com/62747570/140023616-6470b11a-471c-4d44-96c6-e08997f8beb3.png)
+
+
 
 
 

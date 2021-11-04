@@ -1,4 +1,13 @@
-# 1. 데이터 파악 및 EDA
+---
+layout: post
+title:  "팀타율 예측기"
+
+toc: true
+toc_sticky: true
+
+---
+
+## 1. 데이터 파악 및 EDA
 
 
 ```python
@@ -7,7 +16,7 @@ drive.mount('/content/drive')
 ```
 
     Mounted at /content/drive
-    
+
 
 
 ```python
@@ -15,7 +24,7 @@ cd /content/drive/MyDrive/신용카드 연체 예�
 ```
 
     /content/drive/MyDrive/신용카드 연체 예측
-    
+
 
 
 ```python
@@ -41,14 +50,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -193,6 +205,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -229,7 +242,7 @@ df.info()
      19  credit         26457 non-null  float64
     dtypes: float64(4), int64(8), object(8)
     memory usage: 4.0+ MB
-    
+
 
 
 ```python
@@ -245,14 +258,17 @@ df.describe()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -394,6 +410,7 @@ df.describe()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -414,9 +431,9 @@ df.shape
 
 
 - 'begin_month' 변수를 제외한 중복 데이터 10,000개 이상  
-=> 동일 인물이 다른 시기에 카드 개설했다고 가정  
-=> 데이터의 절반이 중복 데이터?  
-=> 한 행으로 줄이는 대신 '개설 카드 개수' 열 추가
+  => 동일 인물이 다른 시기에 카드 개설했다고 가정  
+  => 데이터의 절반이 중복 데이터?  
+  => 한 행으로 줄이는 대신 '개설 카드 개수' 열 추가
 
 
 ```python
@@ -452,14 +469,17 @@ df[df.duplicated(cols)]
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -743,6 +763,7 @@ df[df.duplicated(cols)]
   </tbody>
 </table>
 <p>14358 rows × 20 columns</p>
+
 </div>
 
 
@@ -791,14 +812,17 @@ df
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1106,6 +1130,7 @@ df
   </tbody>
 </table>
 <p>12099 rows × 22 columns</p>
+
 </div>
 
 
@@ -1139,10 +1164,12 @@ plt.show()
     State servant            927
     Student                    4
     Name: income_type, dtype: int64
-    
 
 
-![png](output_17_1.png)
+
+![output_17_1](https://user-images.githubusercontent.com/62747570/140267496-6b1ccc29-778c-4a71-9175-98e688a8d8ca.png)
+
+
 
 
 
@@ -1162,10 +1189,12 @@ plt.show()
     Lower secondary                   132
     Academic degree                    10
     Name: edu_type, dtype: int64
-    
 
 
-![png](output_18_1.png)
+
+![output_18_1](https://user-images.githubusercontent.com/62747570/140267499-aff34e60-90b0-4eb6-9bab-c6cb6eaf2693.png)
+
+
 
 
 
@@ -1182,14 +1211,17 @@ df.groupby(['edu_type'])['income_total'].mean().reset_index()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1226,6 +1258,7 @@ df.groupby(['edu_type'])['income_total'].mean().reset_index()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -1244,10 +1277,12 @@ plt.show()
     Separated                716
     Widow                    508
     Name: family_type, dtype: int64
-    
 
 
-![png](output_20_1.png)
+
+![output_20_1](https://user-images.githubusercontent.com/62747570/140267501-5e5ad7c7-dc82-4049-8bd6-dc7021a21026.png)
+
+
 
 
 
@@ -1265,10 +1300,12 @@ plt.show()
     Office apartment          97
     Co-op apartment           48
     Name: house_type, dtype: int64
-    
 
 
-![png](output_21_1.png)
+
+![output_21_1](https://user-images.githubusercontent.com/62747570/140267502-9999899a-8d82-4980-94ab-51489a548cac.png)
+
+
 
 
 
@@ -1296,7 +1333,7 @@ print(df.occyp_type.value_counts(dropna=False))
     IT staff                   25
     Realty agents              21
     Name: occyp_type, dtype: int64
-    
+
 
 
 ```python
@@ -1328,14 +1365,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1480,6 +1520,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -1540,7 +1581,7 @@ df[df['income_type']=='Pensioner']['occyp_type'].value_counts(dropna=False)
 
 
 - income_type이 Pensioner인 행의 occyp_type은 대부분 결측치  
-=> 결측 중 income_type이 Pensioner인 사람은 'Pensioner'라는 새로운 occyp_type 지정
+  => 결측 중 income_type이 Pensioner인 사람은 'Pensioner'라는 새로운 occyp_type 지정
 
 
 ```python
@@ -1585,9 +1626,9 @@ df[df['income_type']=='Pensioner']['DAYS_EMPLOYED'].value_counts()
 
 
 
-## 이상치 처리
+### 이상치 처리
 
-### 파생 변수
+#### 파생 변수
 
 
 ```python
@@ -1617,14 +1658,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -1793,6 +1837,7 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -1821,14 +1866,17 @@ df.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2009,12 +2057,13 @@ df.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
 
 - income_type이 Pensioner인 행의 DAYS_EMPLOYED 값이 대부분 이상치(365243)로 설정되어 있는 문제  
-=> 다른 사람들의 평균으로 대체
+  => 다른 사람들의 평균으로 대체
 
 
 ```python
@@ -2056,14 +2105,17 @@ df[df['income_type']=='Pensioner'][['DAYS_EMPLOYED', 'career_year', 'career_star
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2143,6 +2195,7 @@ df[df['income_type']=='Pensioner'][['DAYS_EMPLOYED', 'career_year', 'career_star
   </tbody>
 </table>
 <p>2064 rows × 3 columns</p>
+
 </div>
 
 
@@ -2209,14 +2262,17 @@ df2.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2397,6 +2453,7 @@ df2.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -2423,8 +2480,9 @@ plt.yticks(np.arange(0.5, len(df2.index), 1), df.index)
 plt.show()
 ```
 
+![output_62_0](https://user-images.githubusercontent.com/62747570/140267504-a0900a29-35c8-4b12-81bf-103bb062ab71.png)
 
-![png](output_62_0.png)
+
 
 
 
@@ -2558,6 +2616,7 @@ df2[features].corr(method='pearson')['ability'].sort_values(ascending=False)
 ### (불균형 데이터 -> 오버샘플링)
 
 # 우리의 목표는 신용도가 안 좋은 사람을 골라내는 작업  
+
 (더군다나 0,1인 그룹이 2인 그룹보다 상대적으로 매우 적음)  
 => credit이 1인 사람을 모두 0으로 바꿔서 합쳐버려  
 => 다중분류를 이진분류 작업으로 바꿔버려
@@ -2595,14 +2654,17 @@ age_credit
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2675,6 +2737,7 @@ age_credit
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -2715,14 +2778,17 @@ merged_df
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2817,6 +2883,7 @@ merged_df
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -2841,14 +2908,17 @@ merged_df2
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2921,6 +2991,7 @@ merged_df2
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -2944,14 +3015,17 @@ grp_age.sort_values(by='grp_age')
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -2994,13 +3068,14 @@ grp_age.sort_values(by='grp_age')
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
 
 <!-- - 신용도가 높은 사람들의 가입 기간 고려하여 비교하기 -->
 
-## 카드 개수에 따른 신용도
+### 카드 개수에 따른 신용도
 
 
 ```python
@@ -3009,8 +3084,9 @@ plt.scatter(x='credit',y='num_card', data=card_credit, alpha=.3, s=2)
 plt.show()
 ```
 
+![output_77_0](https://user-images.githubusercontent.com/62747570/140267507-c31c89fd-9b83-4f07-bdd4-321d0212e55e.png)
 
-![png](output_77_0.png)
+
 
 
 
@@ -3031,14 +3107,17 @@ XY
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3147,6 +3226,7 @@ XY
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3159,8 +3239,9 @@ plt.ylabel("Mean Credit")
 plt.show()
 ```
 
+![output_79_0](https://user-images.githubusercontent.com/62747570/140267462-b9415cf9-bd75-48bc-a71e-a388d866e879.png)
 
-![png](output_79_0.png)
+
 
 
 
@@ -3183,14 +3264,17 @@ XY_
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3299,6 +3383,7 @@ XY_
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3311,8 +3396,9 @@ plt.ylabel("Mean Income")
 plt.show()
 ```
 
+![output_81_0](https://user-images.githubusercontent.com/62747570/140267465-4961b7b0-3926-4622-a015-99f80596a3c5.png)
 
-![png](output_81_0.png)
+
 
 
 
@@ -3335,14 +3421,17 @@ XY_1
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3451,6 +3540,7 @@ XY_1
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3463,8 +3553,9 @@ plt.ylabel("Mean Num of Email")
 plt.show()
 ```
 
+![output_83_0](https://user-images.githubusercontent.com/62747570/140267467-43269d3f-6ab4-40c5-8a3e-3ef9c2e410cc.png)
 
-![png](output_83_0.png)
+
 
 
 
@@ -3485,14 +3576,17 @@ mean_count
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3565,6 +3659,7 @@ mean_count
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3577,8 +3672,9 @@ plt.ylabel("Mean Days of Employed")
 plt.show()
 ```
 
+![output_85_0](https://user-images.githubusercontent.com/62747570/140267471-af96757e-46f5-47bb-861a-aa7c31f7a866.png)
 
-![png](output_85_0.png)
+
 
 
 
@@ -3599,14 +3695,17 @@ mean_count
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3679,6 +3778,7 @@ mean_count
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3692,8 +3792,9 @@ plt.ylim(1.375,1.5)
 plt.show()
 ```
 
+![output_87_0](https://user-images.githubusercontent.com/62747570/140267472-7a7ab608-6661-4a70-ae7e-bde8f16c44e6.png)
 
-![png](output_87_0.png)
+
 
 
 
@@ -3708,10 +3809,12 @@ plt.show()
 
     /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
       FutureWarning
-    
 
 
-![png](output_88_1.png)
+
+![output_88_1](https://user-images.githubusercontent.com/62747570/140267473-667ea7ce-50f7-42e8-816a-77494434ae81.png)
+
+
 
 
 
@@ -3728,10 +3831,12 @@ plt.show()
 
     /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
       FutureWarning
-    
 
 
-![png](output_89_1.png)
+
+![output_89_1](https://user-images.githubusercontent.com/62747570/140267474-cea26d08-b269-4b23-9bb2-9a89ba495ff3.png)
+
+
 
 
 
@@ -3748,10 +3853,12 @@ plt.show()
 
     /usr/local/lib/python3.7/dist-packages/seaborn/_decorators.py:43: FutureWarning: Pass the following variables as keyword args: x, y. From version 0.12, the only valid positional argument will be `data`, and passing other arguments without an explicit keyword will result in an error or misinterpretation.
       FutureWarning
-    
 
 
-![png](output_90_1.png)
+
+![output_90_1](https://user-images.githubusercontent.com/62747570/140267475-bdb17ffd-3188-409c-afb3-d00c0098c6ae.png)
+
+
 
 
 
@@ -3768,14 +3875,17 @@ df.groupby(['house_type', 'edu_type'])['credit'].mean().reset_index()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -3938,6 +4048,7 @@ df.groupby(['house_type', 'edu_type'])['credit'].mean().reset_index()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -3954,8 +4065,9 @@ plt.ylabel("Credit")
 plt.show()
 ```
 
+![output_92_0](https://user-images.githubusercontent.com/62747570/140267479-fde6c85c-c2f3-4938-8b40-6d3712eb246e.png)
 
-![png](output_92_0.png)
+
 
 
 
@@ -3970,12 +4082,14 @@ plt.ylabel("Credit")
 plt.show()
 ```
 
+![output_93_0](https://user-images.githubusercontent.com/62747570/140267480-f4508694-696b-414c-9bf0-e6286f17a64e.png)
 
-![png](output_93_0.png)
 
 
-# 모델링
-## ANN - 이진 분류
+
+## 모델링
+
+### ANN - 이진 분류
 
 
 ```python
@@ -4014,7 +4128,7 @@ print(y_train.shape, y_test.shape)
 
     (9074, 24) (3025, 24)
     (9074,) (3025,)
-    
+
 
 
 ```python
@@ -4039,7 +4153,7 @@ model.summary()
     Trainable params: 39,425
     Non-trainable params: 0
     _________________________________________________________________
-    
+
 
 
 ```python
@@ -4082,7 +4196,7 @@ history = model.fit(X_train, y_train,
     817/817 [==============================] - 3s 4ms/step - loss: 0.5623 - accuracy: 0.7000 - val_loss: 0.6750 - val_accuracy: 0.6388
     Epoch 12/500
     817/817 [==============================] - 3s 4ms/step - loss: 0.5536 - accuracy: 0.7008 - val_loss: 0.6644 - val_accuracy: 0.6289
-    
+
 
 
 ```python
@@ -4099,8 +4213,9 @@ plt.ylim(0,)
 
 
 
+![output_101_1](https://user-images.githubusercontent.com/62747570/140267484-0adb5295-fe6f-488b-893f-6c983c14778c.png)
 
-![png](output_101_1.png)
+
 
 
 
@@ -4111,10 +4226,12 @@ print(f"min_val_loss: {df_h2['loss'].min()}")
 ```
 
     min_val_loss: 0.4702399671077728
-    
 
 
-![png](output_102_1.png)
+
+![output_102_1](https://user-images.githubusercontent.com/62747570/140267485-95315a3b-69d3-4145-a0a2-c086daa0f1a0.png)
+
+
 
 
 
@@ -4127,7 +4244,7 @@ print(f'test accuracy: {score[1]}')
     95/95 [==============================] - 0s 2ms/step - loss: 0.6568 - accuracy: 0.6284
     test loss: 0.6568126678466797
     test accuracy: 0.6284297704696655
-    
+
 
 - 쓰레기
 
@@ -4184,7 +4301,7 @@ get_clf_eval(y_test, preds)
     재현율: 0.9373
     F1: 0.7636
     AUC: 0.6187
-    
+
 
 
 ```python
@@ -4203,8 +4320,9 @@ plot_importance(lgbm_wrapper, ax=ax)
 
 
 
+![output_110_1](https://user-images.githubusercontent.com/62747570/140267488-0047e51c-56f5-4982-a2d3-c246e0fa8663.png)
 
-![png](output_110_1.png)
+
 
 
 
@@ -4221,14 +4339,17 @@ X.head()
         vertical-align: middle;
     }
 
+
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: right;
     }
+
 </style>
+
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -4391,6 +4512,7 @@ X.head()
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
@@ -4402,7 +4524,7 @@ X.head()
 
 
 
-# Label 바꾸지 않은 데이터 (0,1,2)
+## Label 바꾸지 않은 데이터 (0,1,2)
 
 
 ```python
@@ -4455,7 +4577,7 @@ model.summary()
     Trainable params: 11,521
     Non-trainable params: 0
     _________________________________________________________________
-    
+
 
 
 ```python
@@ -4488,11 +4610,12 @@ df_h.plot()
 
 
 
+![output_120_1](https://user-images.githubusercontent.com/62747570/140267490-e4f0e415-db30-4aca-881f-7f903b1f33c9.png)
 
-![png](output_120_1.png)
 
 
-## Catboost
+
+### Catboost
 
 
 ```python
@@ -4564,12 +4687,13 @@ print(classification_report(y_test, pred))
         accuracy                           0.65      3025
        macro avg       0.45      0.42      0.39      3025
     weighted avg       0.57      0.65      0.56      3025
-    
-    
+
+
+​    
 
     /usr/local/lib/python3.7/dist-packages/sklearn/metrics/_classification.py:1272: UndefinedMetricWarning: Precision and F-score are ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
       _warn_prf(average, modifier, msg_start, len(result))
-    
+
 
 
 ```python
@@ -4598,11 +4722,12 @@ def plot_feature_importance(importance,names,model_type):
 plot_feature_importance(model.get_feature_importance(),X.columns,'CATBOOST')
 ```
 
+![output_131_0](https://user-images.githubusercontent.com/62747570/140267491-106bbcce-1ade-439a-a2ca-dc7e8be5fb47.png)
 
-![png](output_131_0.png)
 
 
-## LGBM
+
+### LGBM
 
 
 ```python
@@ -4639,8 +4764,9 @@ print(classification_report(y_test, preds))
         accuracy                           0.65      3025
        macro avg       0.58      0.42      0.40      3025
     weighted avg       0.62      0.65      0.56      3025
-    
-    
+
+
+​    
 
 
 ```python
@@ -4665,5 +4791,4 @@ model.score(X_test, y_test)
 
 
     0.6466115702479339
-
 

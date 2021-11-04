@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "팀타율 예측기"
+title:  "신용카드 사용자 연체 예측"
 
 toc: true
 toc_sticky: true
